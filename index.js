@@ -22,7 +22,7 @@ const app = express();
 
 // register a webhook handler with middleware
 
-app.post('/', line.middleware(config), (req, res) => {
+app.get('/', line.middleware(config), (req, res) => {
    Promise
        .all(req.body.events.map(handleEvent))
        .then((result) => res.json(result));
