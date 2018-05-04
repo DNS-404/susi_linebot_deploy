@@ -22,7 +22,7 @@ const app = express();
 
 // register a webhook handler with middleware
 
-app.get('/', line.middleware(config), (req, res) => {
+app.post('/webhook', line.middleware(config), (req, res) => {
    Promise
        .all(req.body.events.map(handleEvent))
        .then((result) => res.json(result));
@@ -37,7 +37,7 @@ function handleEvent(event) {
    }
 
    var options1 = {
-       method: 'GET',
+       method: 'POST',
        url: 'http://api.asksusi.com/susi/chat.json',
        qs: {
            timezoneOffset: '-330',
