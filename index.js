@@ -37,7 +37,7 @@ function handleEvent(event) {
    }
 
    var options1 = {
-       method: 'POST',
+       method: 'GET',
        url: 'http://api.asksusi.com/susi/chat.json',
        qs: {
            timezoneOffset: '-330',
