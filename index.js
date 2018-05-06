@@ -36,9 +36,9 @@ function handleEvent(event) {
        return Promise.resolve(null);
    }
 
-   var options1 = {
+   var options = {
        method: 'GET',
-       url: 'http://api.asksusi.com/susi/chat.json',
+       url: 'https://api.susi.ai/susi/chat.json',
        qs: {
            timezoneOffset: '-330',
            q: event.message.text
