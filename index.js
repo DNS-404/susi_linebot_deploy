@@ -57,7 +57,7 @@ function handleEvent(event) {
        var ans = (JSON.parse(body)).answers[0].actions[0].expression;
 
        // create a echoing text message
-       if((JSON.parse(body)).data[0].type === 'photo'){
+       if((JSON.parse(body)).answers[0].data[0].type === 'photo'){
         const answer = {
           type: 'image',
           originalContentUrl: ans,
