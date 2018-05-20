@@ -55,16 +55,16 @@ function handleEvent(event) {
        // answer fetched from susi
        //console.log(body);
        var ans = (JSON.parse(body)).answers[0].actions[0].expression;
-
+       var answer;
        // create a echoing text message
        if((JSON.parse(body)).answers[0].data[0].type === 'photo'){
-        const answer = {
+        answer = {
           type: 'image',
           originalContentUrl: ans,
           previewImageUrl: ans
         }
        } else {
-        const answer = {
+        answer = {
            type: 'text',
            text: ans
         };
