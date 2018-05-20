@@ -163,7 +163,7 @@ function handleEvent(event) {
             var ans = (JSON.parse(body1)).answers[0].actions[0].expression;
             if (type.length == 1 && type[0].type == "answer") {
                 let answer;
-                if((JSON.parse(body)).answers[0].data[0].type === 'photo'){
+                if((JSON.parse(body1)).answers[0].data[0].type === 'photo'){
                     answer = {
                         type: 'image',
                         originalContentUrl: ans,
