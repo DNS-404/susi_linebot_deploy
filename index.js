@@ -8,7 +8,7 @@ var http = require('http');
 
 const config = {
    channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-   channelSecret: process.env.CHANNEL_SECRET,
+   channelSecret: process.env.CHANNEL_SECRET
 };
 
 // create LINE SDK client
@@ -55,12 +55,21 @@ function handleEvent(event) {
        // answer fetched from susi
        //console.log(body);
        var ans = (JSON.parse(body)).answers[0].actions[0].expression;
+
        // create a echoing text message
-       const answer = {
+       if((JSON.parse(body)).data[0].type === 'photo'){
+        const answer = {
+          type: 'image',
+          originalContentUrl: ans,
+          previewImageUrl: ans
+        }
+       } else {
+        const answer = {
            type: 'text',
            text: ans
-       };
-
+        };
+       }
+       
        // use reply API
 
        return client.replyMessage(event.replyToken, answer);
