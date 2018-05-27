@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 const line = require('@line/bot-sdk');
 const express = require('express');
 var request = require("request");
@@ -34,7 +34,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 });
 
 // event handler
-/*
+
 function handleEvent(event) {
    if (event.type !== 'message' || event.message.type !== 'text') {
        // ignore non-text-message event
@@ -74,9 +74,54 @@ function handleEvent(event) {
 
        return client.replyMessage(event.replyToken, answer);
    })
-}*/
+}
 
 
+setInterval(function() {
+        http.get(process.env.HEROKU_URL);
+    }, 600000); // every 10 minutes
+
+// listen on port
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+   console.log(`listening on ${port}`);
+});*/
+'use strict';
+
+const line = require('@line/bot-sdk');
+const express = require('express');
+var request = require('request');
+var http = require('http');
+
+// create LINE SDK config from env variables
+const config = {
+    channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
+    channelSecret: process.env.CHANNEL_SECRET,
+};
+
+// create LINE SDK client
+const client = new line.Client(config);
+
+// create Express app
+// about Express itself: https://expressjs.com/
+const app = express();
+
+// register a webhook handler with middleware
+app.post('/webhook', line.middleware(config), (req, res) => {
+    Promise
+        .all(req.body.events.map(handleEvent))
+        .then((result) => res.json(result))
+        .catch((err) => {
+            console.error(err);
+            res.status(500).end();
+        });
+});
+
+
+setInterval(function() {
+        http.get(process.env.HEROKU_URL);
+    }, 600000); // every 10 minutes
 
 // event handler
 function handleEvent(event) {
@@ -94,7 +139,7 @@ function handleEvent(event) {
         }
     };
 
-    if (event.message.text == "start" || event.message.text == "Start" || event.message.text == "START") {
+    if (event.message.text.toLowerCase() == "start") {
         const answer = {
             "type": "template",
             "altText": "this is a template",
@@ -199,7 +244,7 @@ function handleEvent(event) {
                 // use reply API
                 return client.replyMessage(event.replyToken, answer);
 
-            } else if (type.length == 1 && type[0].type == "table") {
+            } else if (type[0].type == "table") {
                 var data = JSON.parse(body1).answers[0].data;
                 var columns = type[0].columns;
                 var key = Object.keys(columns);
@@ -277,13 +322,9 @@ function handleEvent(event) {
     }
 }
 
-setInterval(function() {
-        http.get(process.env.HEROKU_URL);
-    }, 600000); // every 10 minutes
-
 // listen on port
-
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
-   console.log(`listening on ${port}`);
+    console.log(`listening on ${port}`);
 });
+
