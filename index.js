@@ -206,6 +206,7 @@ function handleEvent(event) {
             //console.log(body1);
             var type = (JSON.parse(body1)).answers[0].actions;
             var ans = (JSON.parse(body1)).answers[0].actions[0].expression;
+            
             if (type.length == 1 && type[0].type == "answer") {
                 let answer;
                 if((JSON.parse(body1)).answers[0].data[0].type === 'photo'){
