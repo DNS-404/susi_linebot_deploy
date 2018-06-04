@@ -218,6 +218,7 @@ function handleEvent(event) {
                     "latitude": lat,
                     "longitude": lon
                 };
+                console.log(answer);
                 // use reply API
                 return client.replyMessage(event.replyToken, answer);
             
