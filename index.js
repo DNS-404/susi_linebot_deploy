@@ -206,24 +206,7 @@ function handleEvent(event) {
             //console.log(body1);
             var type = (JSON.parse(body1)).answers[0].actions;
             var ans = (JSON.parse(body1)).answers[0].actions[0].expression;
-            
-            if (type.length == 1 && type[0].type == "answer") {
-                let answer;
-                if((JSON.parse(body1)).answers[0].data[0].type === 'photo'){
-                    answer = {
-                        type: 'image',
-                        originalContentUrl: ans,
-                        previewImageUrl: ans
-                    };
-                } else {
-                    answer = {
-                        type: 'text',
-                        text: ans
-                    };
-                }
-                // use reply API
-                return client.replyMessage(event.replyToken, answer);
-            } else if ( ((JSON.parse(body1)).answers[0].data[0].lon) || ((JSON.parse(body1)).answers[0].data[0].lat) ) {
+            if ( ((JSON.parse(body1)).answers[0].data[0].lon) || ((JSON.parse(body1)).answers[0].data[0].lat) ) {
                 var lat = JSON.parse(body1).answers[0].data[0].lat;
                 var lon = JSON.parse(body1).answers[0].data[0].lon;
                 var address = JSON.parse(body1).answers[0].data[0].locationInfo;
@@ -244,7 +227,23 @@ function handleEvent(event) {
 
                 // use reply API
                 return client.replyMessage(event.replyToken, answer);
-
+            
+            } else if (type.length == 1 && type[0].type == "answer") {
+                let answer;
+                if((JSON.parse(body1)).answers[0].data[0].type === 'photo'){
+                    answer = {
+                        type: 'image',
+                        originalContentUrl: ans,
+                        previewImageUrl: ans
+                    };
+                } else {
+                    answer = {
+                        type: 'text',
+                        text: ans
+                    };
+                }
+                // use reply API
+                return client.replyMessage(event.replyToken, answer);
             } else if (type[0].type == "table") {
                 var data = JSON.parse(body1).answers[0].data;
                 var columns = type[0].columns;
