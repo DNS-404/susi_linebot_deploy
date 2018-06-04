@@ -222,11 +222,11 @@ function handleEvent(event) {
                 }
                 // use reply API
                 return client.replyMessage(event.replyToken, answer);
-            } else if (type.length == 3 && type[2].type == "map") {
-                var lat = type[2].latitude;
-                var lon = type[2].longitude;
-                var address = JSON.parse(body1).answers[0].data[0][1]
-
+            } else if ( ((JSON.parse(body1)).answers[0].data[0].lon) || ((JSON.parse(body1)).answers[0].data[0].lat) ) {
+                var lat = JSON.parse(body1).answers[0].data[0].lat;
+                var lon = JSON.parse(body1).answers[0].data[0].lon;
+                var address = JSON.parse(body1).answers[0].data[0].locationInfo;
+                var title = JSON.parse(body1).answers[0].data[0][1];
                 const answer = [{
 
                         type: 'text',
@@ -234,7 +234,7 @@ function handleEvent(event) {
                     },
                     {
                         "type": "location",
-                        "title": "Location",
+                        "title": ,
                         "address": address,
                         "latitude": lat,
                         "longitude": lon
