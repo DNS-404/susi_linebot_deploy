@@ -234,7 +234,7 @@ function handleEvent(event) {
                     },
                     {
                         "type": "location",
-                        "title": ,
+                        "title": title,
                         "address": address,
                         "latitude": lat,
                         "longitude": lon
