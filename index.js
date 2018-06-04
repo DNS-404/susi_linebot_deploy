@@ -211,20 +211,13 @@ function handleEvent(event) {
                 var lon = JSON.parse(body1).answers[0].data[0].lon;
                 var address = JSON.parse(body1).answers[0].data[0].locationInfo;
                 var title = JSON.parse(body1).answers[0].data[0][1];
-                const answer = [{
-
-                        type: 'text',
-                        text: ans
-                    },
-                    {
-                        "type": "location",
-                        "title": title,
-                        "address": address,
-                        "latitude": lat,
-                        "longitude": lon
-                    }
-                ]
-
+                const answer = {
+                    "type": "location",
+                    "title": title,
+                    "address": address,
+                    "latitude": lat,
+                    "longitude": lon
+                };
                 // use reply API
                 return client.replyMessage(event.replyToken, answer);
             
