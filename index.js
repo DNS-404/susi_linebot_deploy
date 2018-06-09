@@ -212,11 +212,11 @@ function handleEvent(event) {
                 var address = JSON.parse(body1).answers[0].data[0].locationInfo;
                 var title = JSON.parse(body1).answers[0].data[0][1];
                 const answer = {
-                    "type": "location",
-                    "title": title,
-                    "address": address,
-                    "latitude": lat,
-                    "longitude": lon
+                    type: "location",
+                    title: title,
+                    address: address,
+                    latitude: lat,
+                    longitude: lon
                 };
                 console.log(answer);
                 // use reply API
