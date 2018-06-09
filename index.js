@@ -214,7 +214,7 @@ function handleEvent(event) {
                 const answer = {
                     type: "location",
                     title: title,
-                    address: 'what',
+                    address: ' ',
                     latitude: lat,
                     longitude: lon
                 };
