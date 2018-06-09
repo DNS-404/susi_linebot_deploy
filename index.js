@@ -218,12 +218,11 @@ function handleEvent(event) {
                     latitude: lat,
                     longitude: lon
                 };
-                console.log(answer);
                 // use reply API
                 return client.replyMessage(event.replyToken, answer)
-  				.catch((err) => {
-  					console.log('error - '+err);
-  				});;
+                .catch((err) => {
+                    console.log('Error - '+err);
+                });
             
             } else if (type.length == 1 && type[0].type == "answer") {
                 let answer;
@@ -241,6 +240,7 @@ function handleEvent(event) {
                 }
                 // use reply API
                 return client.replyMessage(event.replyToken, answer);
+
             } else if (type[0].type == "table") {
                 var data = JSON.parse(body1).answers[0].data;
                 var columns = type[0].columns;
@@ -324,4 +324,3 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`listening on ${port}`);
 });
-
