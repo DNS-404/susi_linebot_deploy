@@ -221,9 +221,6 @@ function handleEvent(event) {
                 console.log(answer);
                 // use reply API
                 return client.replyMessage(event.replyToken, answer)
-                .then(() => {
-    				//
-  				})
   				.catch((err) => {
   					console.log('error - '+err);
   				});;
