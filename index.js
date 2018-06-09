@@ -220,7 +220,13 @@ function handleEvent(event) {
                 };
                 console.log(answer);
                 // use reply API
-                return client.replyMessage(event.replyToken, answer);
+                return client.replyMessage(event.replyToken, answer)
+                .then(() => {
+    				//
+  				})
+  				.catch((err) => {
+  					console.log('error - '+err);
+  				});;
             
             } else if (type.length == 1 && type[0].type == "answer") {
                 let answer;
