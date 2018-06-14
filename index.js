@@ -234,7 +234,7 @@ function handleEvent(event) {
                     previewImageUrl: previewUrl
                 };
                 console.log(videoUrl);
-                console.log(previewImageUrl);
+                console.log(previewUrl);
                 // use reply API
                 return client.replyMessage(event.replyToken, answer)
                 .catch((err) => {
