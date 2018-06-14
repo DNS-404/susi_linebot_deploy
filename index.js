@@ -224,6 +224,21 @@ function handleEvent(event) {
                     console.log('Error - '+err);
                 });
             
+            } else if(JSON.parse(body1).answers[0].data[0].type === 'gif') {
+                let videoUrl = JSON.parse(body1).answers[0].data[0].v1.original.mp4;
+                let previewUrl = JSON.parse(body1).answer[0].data[0].images.480w_still.url;
+                const answer = {
+                    type: 'video',
+                    originalContentUrl: videoUrl,
+                    previewImageUrl: previewUrl
+                };
+                console.log(videoUrl);
+                console.log(previewImageUrl);
+                // use reply API
+                return client.replyMessage(event.replyToken, answer)
+                .catch((err) => {
+                    console.log('Error - '+err);
+                });
             } else if (type.length == 1 && type[0].type == "answer") {
                 let answer;
                 if((JSON.parse(body1)).answers[0].data[0].type === 'photo'){
