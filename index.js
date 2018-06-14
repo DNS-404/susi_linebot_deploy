@@ -226,7 +226,7 @@ function handleEvent(event) {
             
             } else if(JSON.parse(body1).answers[0].data[0].type === 'gif') {
                 let videoUrl = JSON.parse(body1).answers[0].data[0].v1.original.mp4;
-                let previewUrl = JSON.parse(body1).answer[0].data[0].images[20].url;
+                let previewUrl = JSON.parse(body1).answer[0].data[0].images["480w_still"].url;
                 const answer = {
                     type: 'video',
                     originalContentUrl: videoUrl,
